@@ -44,8 +44,14 @@ public class TestCross {
     private class CustomButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-//            TestKeyboard kb = new TestKeyboard("kb new");
 //            String l = kb.getResult();
+
+            if (kb != null) {
+                System.out.println("gainedFocus:" + kb.getLetter());
+                butt.setText(kb.getLetter());
+            }
+            
+
             l = kb.getResult();
             System.out.println(l);
             System.out .println(kb.getLetter());
