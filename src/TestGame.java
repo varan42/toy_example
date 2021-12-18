@@ -10,7 +10,7 @@ public class TestGame {
 //        tk = new TestKeyboard("Keyboard");
 
 
-        System.out.println(tk.getLetter());
+//        System.out.println(tk.getLetter());
     }
 
     public static void main (String [] args){

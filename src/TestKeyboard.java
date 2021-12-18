@@ -3,35 +3,34 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TestKeyboard extends JDialog {
-    private JFrame frame;
-
+public class TestKeyboard extends JDialog implements ActionListener{
+//    private JFrame frame;
     private JPanel panelQuestion;
     private JButton butt;
-
     private String letter;
-
     private TestCross tc;
 
-    private CustomButtonListener listen = new CustomButtonListener();
 
-    public TestKeyboard(String title, TestCross tc){
+//    private CustomButtonListener listen = new CustomButtonListener();
 
-        this.tc = tc;
-        this.setModalityType(DEFAULT_MODALITY_TYPE);
+    public TestKeyboard(Frame parent){
 
-        frame = new JFrame(title);
+        super(parent, "Keyboard", true);
+//        this.tc = tc;
+//        this.setModalityType(DEFAULT_MODALITY_TYPE);
+
+//        frame = new JFrame();
         panelQuestion = new JPanel();
         butt = new JButton("LETTER");
 
         butt.setBackground(Color.green);
-        butt.addActionListener(listen);
+        butt.addActionListener(this);
 
         panelQuestion.add(butt);
-        frame.add(panelQuestion);
+        getContentPane().add(panelQuestion);
 
-        frame.pack();
-        frame.setVisible(false);
+        pack();
+        setVisible(false);
     }
 
     public String getLetter() {
@@ -43,31 +42,29 @@ public class TestKeyboard extends JDialog {
     }
 
     public void setFrameVisible(boolean flag){
-        frame.setVisible(flag);
+        setVisible(flag);
     }
 
     public void disposeFrame(){
-        frame.dispose();
+        dispose();
     }
 
     public boolean getFrameVisible(){
-        return frame.isVisible();
+        return isVisible();
     }
 
     public String getResult(){
-        this.frame.setVisible(true);
-        return this.getLetter();
+        setVisible(true);
+        return letter;
     }
 
-    private class CustomButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String action = ((JButton) e.getSource()).getText();
-            setLetter(action);
+    public void actionPerformed(ActionEvent e) {
+        String action = ((JButton) e.getSource()).getText();
+        setLetter(action);
 //            letter = action;
-            System.out.println("letter: " + letter);
-            frame.setVisible(false);
-            frame.dispose();
-        }
+        System.out.println("letter: " + letter);
+        setVisible(false);
+        dispose();
     }
 }
+

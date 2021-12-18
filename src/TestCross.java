@@ -20,9 +20,9 @@ public class TestCross {
 
     public TestCross(String title) {
 
-        kb = new TestKeyboard("kb new", this);
-
         frame = new JFrame(title);
+        kb = new TestKeyboard(frame);
+
         frame.setSize(200,200);
 //        frame.addWindowFocusListener(listenWind);
         panelQuestion = new JPanel();
@@ -46,15 +46,18 @@ public class TestCross {
         public void actionPerformed(ActionEvent e) {
 //            String l = kb.getResult();
 
-            if (kb != null) {
-                System.out.println("gainedFocus:" + kb.getLetter());
-                butt.setText(kb.getLetter());
-            }
-            
+//            if (kb != null) {
+//                System.out.println("gainedFocus:" + kb.getLetter());
+//                butt.setText(kb.getLetter());
+//            }
+
 
             l = kb.getResult();
             System.out.println(l);
             System.out .println(kb.getLetter());
+
+            butt.setText(l);
+
             if (frame.isFocused()){
                 System.out .println(kb.getLetter());
             }
