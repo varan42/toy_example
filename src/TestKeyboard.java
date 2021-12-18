@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TestKeyboard {
+public class TestKeyboard extends JDialog {
     private JFrame frame;
 
     private JPanel panelQuestion;
@@ -11,8 +11,14 @@ public class TestKeyboard {
 
     private String letter;
 
+    private TestCross tc;
+
     private CustomButtonListener listen = new CustomButtonListener();
-    public TestKeyboard(String title){
+
+    public TestKeyboard(String title, TestCross tc){
+
+        this.tc = tc;
+        this.setModalityType(DEFAULT_MODALITY_TYPE);
 
         frame = new JFrame(title);
         panelQuestion = new JPanel();
@@ -25,7 +31,7 @@ public class TestKeyboard {
         frame.add(panelQuestion);
 
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(false);
     }
 
     public String getLetter() {
@@ -44,14 +50,24 @@ public class TestKeyboard {
         frame.dispose();
     }
 
+    public boolean getFrameVisible(){
+        return frame.isVisible();
+    }
+
+    public String getResult(){
+        this.frame.setVisible(true);
+        return this.getLetter();
+    }
+
     private class CustomButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String action = ((JButton) e.getSource()).getText();
-            letter = action;
+            setLetter(action);
+//            letter = action;
             System.out.println("letter: " + letter);
+            frame.setVisible(false);
             frame.dispose();
-//            frame.setVisible(false);
         }
     }
 }
